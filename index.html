@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lounis Hamrani — Développeur logiciel & web (BUT Informatique)</title>
+<meta name="description" content="Portfolio de Lounis Hamrani, étudiant en BUT Informatique (RACD) à l'IUT de Metz. Recherche de stage de 8 semaines en développement logiciel / web au Luxembourg, du 12 avril au 4 juin 2027.">
+<meta name="author" content="Lounis Hamrani">
+<meta property="og:title" content="Lounis Hamrani — Développeur logiciel & web">
+<meta property="og:description" content="Étudiant en BUT Informatique (RACD) · Stage de 8 semaines (12 avril – 4 juin 2027) · Luxembourg / Metz">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://hamrani-lounis.github.io/">
+<meta name="theme-color" content="#0b0f19">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230b0f19'/%3E%3Ctext x='16' y='22' font-family='monospace' font-size='16' font-weight='700' fill='%2338bdf8' text-anchor='middle'%3ELH%3C/text%3E%3C/svg%3E">
+<style>
+  :root {
+    --bg: #0b0f19;
+    --bg-alt: #0f172a;
+    --surface: #111a2e;
+    --border: #1e293b;
+    --border-strong: #334155;
+    --text: #e5e7eb;
+    --text-soft: #cbd5e1;
+    --muted: #94a3b8;
+    --accent: #38bdf8;
+    --accent-strong: #2563eb;
+    --ok: #34d399;
+    --radius: 10px;
+    --maxw: 1080px;
+    --sans: Inter, "Segoe UI", system-ui, -apple-system, Roboto, "Helvetica Neue", Arial, sans-serif;
+    --mono: "JetBrains Mono", "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; text-underline-offset: 3px; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
+
+  .skip {
+    position: absolute; left: -9999px; top: 8px;
+    background: var(--accent); color: var(--bg); padding: 8px 14px; border-radius: 6px; z-index: 100;
+  }
+  .skip:focus { left: 16px; }
+
+  /* ---------- Navigation ---------- */
+  .nav {
+    position: fixed; inset: 0 0 auto 0; z-index: 50;
+    background: rgba(11, 15, 25, .88);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav .wrap {
+    display: flex; align-items: center; justify-content: space-between;
+    height: 60px; gap: 16px;
+  }
+  .brand {
+    font-family: var(--mono); font-weight: 700; font-size: 15px;
+    color: var(--text); white-space: nowrap;
+  }
+  .brand span { color: var(--accent); }
+  .brand:hover { text-decoration: none; }
+  .nav ul {
+    display: flex; gap: 4px; list-style: none; margin: 0; padding: 0;
+    overflow-x: auto; scrollbar-width: none;
+  }
+  .nav ul::-webkit-scrollbar { display: none; }
+  .nav ul a {
+    display: block; padding: 6px 12px; border-radius: 6px;
+    color: var(--muted); font-size: 14px; white-space: nowrap;
+  }
+  .nav ul a:hover { color: var(--text); background: var(--surface); text-decoration: none; }
+
+  section { scroll-margin-top: 72px; }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    padding: 140px 0 96px;
+    border-bottom: 1px solid var(--border);
+    background:
+      linear-gradient(var(--border) 1px, transparent 1px) 0 0 / 40px 40px,
+      linear-gradient(90deg, var(--border) 1px, transparent 1px) 0 0 / 40px 40px,
+      var(--bg);
+    background-blend-mode: normal;
+    position: relative;
+  }
+  .hero::after {
+    content: ""; position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 30% 40%, transparent 0%, var(--bg) 70%);
+    pointer-events: none;
+  }
+  .hero .wrap { position: relative; z-index: 1; }
+
+  .badge {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 7px 14px;
+    border: 1px solid rgba(52, 211, 153, .35);
+    background: rgba(52, 211, 153, .08);
+    color: #a7f3d0;
+    border-radius: 999px;
+    font-size: 13.5px; font-weight: 500;
+  }
+  .dot {
+    width: 8px; height: 8px; border-radius: 50%; background: var(--ok); flex: none;
+    box-shadow: 0 0 0 3px rgba(52, 211, 153, .2);
+  }
+
+  .hero h1 {
+    margin: 28px 0 8px;
+    font-size: clamp(38px, 7vw, 64px);
+    line-height: 1.05;
+    letter-spacing: -.02em;
+    font-weight: 800;
+  }
+  .hero h1 .last { color: var(--accent); }
+  .role {
+    margin: 0 0 22px;
+    font-size: clamp(17px, 2.4vw, 20px);
+    color: var(--text-soft);
+    font-weight: 500;
+  }
+  .pitch {
+    max-width: 640px; margin: 0 0 34px;
+    color: var(--muted); font-size: 17px;
+  }
+  .pitch strong { color: var(--text); font-weight: 600; }
+
+  .actions { display: flex; flex-wrap: wrap; gap: 12px; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 11px 20px;
+    border-radius: 8px;
+    border: 1px solid var(--border-strong);
+    color: var(--text);
+    font-size: 15px; font-weight: 600;
+    background: var(--surface);
+    transition: border-color .15s, background .15s;
+  }
+  .btn:hover { border-color: var(--accent); text-decoration: none; }
+  .btn.primary { background: var(--accent-strong); border-color: var(--accent-strong); color: #fff; }
+  .btn.primary:hover { background: #1d4ed8; border-color: #1d4ed8; }
+  .btn svg { width: 17px; height: 17px; fill: currentColor; flex: none; }
+
+  /* ---------- Sections communes ---------- */
+  .block { padding: 88px 0; border-bottom: 1px solid var(--border); }
+  .block.alt { background: var(--bg-alt); }
+  .eyebrow {
+    font-family: var(--mono); font-size: 13px; color: var(--accent);
+    margin: 0 0 8px;
+  }
+  h2 {
+    margin: 0 0 12px;
+    font-size: clamp(26px, 4vw, 34px);
+    letter-spacing: -.01em;
+    line-height: 1.2;
+  }
+  .lead { margin: 0 0 44px; color: var(--muted); max-width: 640px; }
+
+  /* ---------- Projets ---------- */
+  .projects {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+  }
+  .card {
+    display: flex; flex-direction: column;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 26px;
+    transition: border-color .15s;
+  }
+  .card:hover { border-color: var(--border-strong); }
+  .card-top {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 16px;
+  }
+  .num { font-family: var(--mono); font-size: 13px; color: var(--muted); }
+  .lang {
+    font-family: var(--mono); font-size: 12px; color: var(--muted);
+    display: inline-flex; align-items: center; gap: 6px;
+  }
+  .lang i { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+  .card h3 { margin: 0 0 12px; font-size: 19px; line-height: 1.35; }
+  .card p { margin: 0 0 16px; color: var(--text-soft); font-size: 15px; }
+  .card ul {
+    margin: 0 0 22px; padding: 0; list-style: none;
+    font-size: 14.5px; color: var(--muted);
+  }
+  .card li { position: relative; padding-left: 18px; margin-bottom: 6px; }
+  .card li::before {
+    content: "›"; position: absolute; left: 2px; top: -1px;
+    color: var(--accent); font-family: var(--mono); font-weight: 700;
+  }
+  .card code, .mono {
+    font-family: var(--mono); font-size: .9em; color: var(--text);
+    background: rgba(148, 163, 184, .1); padding: 1px 5px; border-radius: 4px;
+  }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; padding-top: 4px; }
+  .tag {
+    font-family: var(--mono); font-size: 12.5px;
+    padding: 3px 9px;
+    border: 1px solid var(--border-strong);
+    border-radius: 5px;
+    color: var(--text-soft);
+    background: var(--bg);
+  }
+  .repo-link {
+    display: flex; align-items: center; gap: 8px;
+    margin-top: 20px; padding-top: 16px;
+    border-top: 1px solid var(--border);
+    font-family: var(--mono); font-size: 12.5px;
+    overflow-wrap: anywhere;
+  }
+  .repo-link svg { width: 16px; height: 16px; fill: currentColor; flex: none; }
+
+  /* ---------- Compétences ---------- */
+  .skills {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+  }
+  .skill-group {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 22px;
+    background: var(--bg);
+  }
+  .skill-group h3 {
+    margin: 0 0 16px;
+    font-size: 13px; font-family: var(--mono); font-weight: 600;
+    color: var(--accent); text-transform: uppercase; letter-spacing: .06em;
+  }
+
+  /* ---------- Parcours ---------- */
+  .timeline { list-style: none; margin: 0; padding: 0; max-width: 760px; }
+  .timeline li {
+    display: grid; grid-template-columns: 130px 1fr; gap: 24px;
+    padding: 24px 0;
+    border-top: 1px solid var(--border);
+  }
+  .timeline li:last-child { border-bottom: 1px solid var(--border); }
+  .period { font-family: var(--mono); font-size: 14px; color: var(--accent); padding-top: 2px; }
+  .timeline h3 { margin: 0 0 4px; font-size: 18px; }
+  .timeline .place { margin: 0 0 6px; color: var(--text-soft); }
+  .timeline .detail { margin: 0; color: var(--muted); font-size: 15px; }
+
+  /* ---------- Contact ---------- */
+  .contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 16px;
+    max-width: 640px;
+    margin-bottom: 36px;
+  }
+  .contact-item {
+    display: flex; flex-direction: column; gap: 4px;
+    padding: 20px 22px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface);
+    color: var(--text);
+    transition: border-color .15s;
+    min-width: 0;
+  }
+  a.contact-item:hover { border-color: var(--accent); text-decoration: none; }
+  .contact-item .k { font-family: var(--mono); font-size: 12.5px; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
+  .contact-item .v { font-weight: 600; overflow-wrap: anywhere; }
+  .meta { display: flex; flex-wrap: wrap; gap: 10px 28px; color: var(--muted); font-size: 15px; }
+  .meta span { display: inline-flex; align-items: center; gap: 8px; }
+  .meta svg { width: 16px; height: 16px; fill: var(--accent); flex: none; }
+
+  footer {
+    padding: 28px 0;
+    font-size: 13.5px; color: var(--muted);
+  }
+  footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; }
+  footer .mono { background: none; padding: 0; color: var(--muted); }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 720px) {
+    .wrap { padding: 0 18px; }
+    .nav .wrap { height: 56px; }
+    .brand .full { display: none; }
+    .nav ul a { padding: 6px 8px; font-size: 13.5px; }
+    .hero { padding: 112px 0 72px; }
+    .badge { font-size: 12.5px; border-radius: 12px; align-items: flex-start; }
+    .badge .dot { margin-top: 5px; }
+    .block { padding: 64px 0; }
+    .btn { flex: 1 1 calc(50% - 6px); justify-content: center; }
+    .timeline li { grid-template-columns: 1fr; gap: 6px; }
+    .card { padding: 22px; }
+  }
+  @media (max-width: 480px) {
+    .brand { display: none; }
+    .nav ul { width: 100%; justify-content: space-between; }
+  }
+  @media (max-width: 380px) {
+    .nav ul a { padding: 6px 6px; font-size: 13px; }
+    .btn { flex-basis: 100%; }
+  }
+
+  @media print {
+    .nav, .actions { display: none; }
+    body { background: #fff; color: #000; }
+    .hero, .block, .block.alt { background: none; padding: 24px 0; }
+    .hero::after { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<a class="skip" href="#projets">Aller aux projets</a>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="#accueil">&lt;LH<span class="full">&nbsp;/&nbsp;Hamrani</span><span>/&gt;</span></a>
+    <nav aria-label="Navigation principale">
+      <ul>
+        <li><a href="#accueil">Accueil</a></li>
+        <li><a href="#projets">Projets</a></li>
+        <li><a href="#competences">Compétences</a></li>
+        <li><a href="#parcours">Parcours</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <!-- ===================== HERO ===================== -->
+  <section class="hero" id="accueil">
+    <div class="wrap">
+      <span class="badge"><span class="dot" aria-hidden="true"></span>Disponible pour un stage de 8 semaines (12 avril – 4 juin 2027) · Mobilité Luxembourg / Metz</span>
+
+      <h1>Lounis <span class="last">HAMRANI</span></h1>
+      <p class="role">Étudiant en BUT Informatique (RACD) · Futur stagiaire en développement logiciel &amp; web</p>
+
+      <p class="pitch">
+        J'écris du code que je peux justifier ligne par ligne : <strong>typage strict</strong> en TypeScript,
+        <strong>mémoire maîtrisée</strong> en C, <strong>schémas relationnels contraints</strong> en SQL.
+        De la modélisation des données jusqu'à l'interface, je travaille chaque étape du cycle de développement avec la même rigueur.
+      </p>
+
+      <div class="actions">
+        <a class="btn primary" href="#projets">Voir les projets</a>
+        <a class="btn" href="https://github.com/Hamrani-Lounis" target="_blank" rel="noopener">
+          <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+          GitHub
+        </a>
+        <a class="btn" href="https://www.linkedin.com/in/lounis-hamrani-b28143375" target="_blank" rel="noopener">
+          <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M0 1.15C0 .52.52 0 1.18 0h13.64C15.48 0 16 .52 16 1.15v13.7c0 .63-.52 1.15-1.18 1.15H1.18C.52 16 0 15.48 0 14.85V1.15zm4.94 12.24V6.17H2.54v7.22h2.4zM3.74 5.18c.84 0 1.36-.55 1.36-1.25-.02-.71-.52-1.25-1.34-1.25-.82 0-1.36.54-1.36 1.25 0 .7.52 1.25 1.33 1.25h.01zm4.91 8.21V9.36c0-.22.02-.43.08-.59.17-.43.57-.88 1.23-.88.87 0 1.21.66 1.21 1.63v3.87h2.4V9.25c0-2.22-1.18-3.25-2.76-3.25-1.27 0-1.84.7-2.16 1.2v.02h-.01l.01-.02V6.17h-2.4c.03.68 0 7.22 0 7.22h2.4z"/></svg>
+          LinkedIn
+        </a>
+        <a class="btn" href="#contact">Me contacter</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== PROJETS ===================== -->
+  <section class="block" id="projets">
+    <div class="wrap">
+      <p class="eyebrow">// 01 — projets</p>
+      <h2>Projets</h2>
+      <p class="lead">Un même domaine métier (la réservation de salles), traité dans trois technologies : une interface web typée, un programme système en C et une base de données relationnelle. Tout le code est public.</p>
+
+      <div class="projects">
+
+        <article class="card">
+          <div class="card-top">
+            <span class="num">01</span>
+            <span class="lang"><i style="background:#3178c6"></i>TypeScript</span>
+          </div>
+          <h3>Application web de réservation de salles</h3>
+          <p>Application monopage développée sans framework externe.</p>
+          <ul>
+            <li>Algorithme métier de détection et de résolution des conflits de créneaux horaires</li>
+            <li>TypeScript en mode <code>strict</code>, modèle de données entièrement décrit par interfaces</li>
+            <li>Persistance locale des données côté navigateur</li>
+          </ul>
+          <div class="tags">
+            <span class="tag">TypeScript (strict)</span>
+            <span class="tag">HTML5</span>
+            <span class="tag">CSS3 natif</span>
+          </div>
+          <a class="repo-link" href="https://github.com/Hamrani-Lounis/booking-typescript" target="_blank" rel="noopener">
+            <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 010-1.5h1.75v-2h-8a1 1 0 00-.71 1.71.75.75 0 01-1.07 1.05A2.5 2.5 0 012 11.5v-9zm10.5-1h-8a1 1 0 00-1 1v6.71A2.5 2.5 0 014.5 9h8V1.5zM5 12.25v3.25a.25.25 0 00.4.2l1.45-1.09a.25.25 0 01.3 0l1.45 1.09a.25.25 0 00.4-.2v-3.25a.25.25 0 00-.25-.25h-3.5a.25.25 0 00-.25.25z"/></svg>
+            Hamrani-Lounis/booking-typescript
+          </a>
+        </article>
+
+        <article class="card">
+          <div class="card-top">
+            <span class="num">02</span>
+            <span class="lang"><i style="background:#a8b9cc"></i>C</span>
+          </div>
+          <h3>Gestionnaire de réservations en console</h3>
+          <p>Application modulaire avec compilation automatisée via Makefile.</p>
+          <ul>
+            <li>Gestion rigoureuse de la mémoire dynamique (<code>malloc</code> / <code>free</code>)</li>
+            <li>Persistance des structures sur disque via fichiers binaires</li>
+            <li>Découpage en modules et compilation séparée</li>
+          </ul>
+          <div class="tags">
+            <span class="tag">C99</span>
+            <span class="tag">Makefile</span>
+            <span class="tag">Bash</span>
+          </div>
+          <a class="repo-link" href="https://github.com/Hamrani-Lounis/booking-c" target="_blank" rel="noopener">
+            <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 010-1.5h1.75v-2h-8a1 1 0 00-.71 1.71.75.75 0 01-1.07 1.05A2.5 2.5 0 012 11.5v-9zm10.5-1h-8a1 1 0 00-1 1v6.71A2.5 2.5 0 014.5 9h8V1.5zM5 12.25v3.25a.25.25 0 00.4.2l1.45-1.09a.25.25 0 01.3 0l1.45 1.09a.25.25 0 00.4-.2v-3.25a.25.25 0 00-.25-.25h-3.5a.25.25 0 00-.25.25z"/></svg>
+            Hamrani-Lounis/booking-c
+          </a>
+        </article>
+
+        <article class="card">
+          <div class="card-top">
+            <span class="num">03</span>
+            <span class="lang"><i style="background:#e38c00"></i>SQL</span>
+          </div>
+          <h3>Schéma relationnel et requêtes analytiques</h3>
+          <p>Conception intégrale de la base de données de réservation.</p>
+          <ul>
+            <li>Clés primaires / étrangères, contraintes d'intégrité et index</li>
+            <li>10 requêtes analytiques : taux d'occupation, détection de disponibilité</li>
+            <li>Jointures multi-tables et agrégations</li>
+          </ul>
+          <div class="tags">
+            <span class="tag">MySQL</span>
+            <span class="tag">MCD / MLD</span>
+            <span class="tag">Modélisation relationnelle</span>
+          </div>
+          <a class="repo-link" href="https://github.com/Hamrani-Lounis/booking-mysql" target="_blank" rel="noopener">
+            <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 010-1.5h1.75v-2h-8a1 1 0 00-.71 1.71.75.75 0 01-1.07 1.05A2.5 2.5 0 012 11.5v-9zm10.5-1h-8a1 1 0 00-1 1v6.71A2.5 2.5 0 014.5 9h8V1.5zM5 12.25v3.25a.25.25 0 00.4.2l1.45-1.09a.25.25 0 01.3 0l1.45 1.09a.25.25 0 00.4-.2v-3.25a.25.25 0 00-.25-.25h-3.5a.25.25 0 00-.25.25z"/></svg>
+            Hamrani-Lounis/booking-mysql
+          </a>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== COMPÉTENCES ===================== -->
+  <section class="block alt" id="competences">
+    <div class="wrap">
+      <p class="eyebrow">// 02 — compétences</p>
+      <h2>Compétences techniques</h2>
+      <p class="lead">Les outils que j'utilise réellement en cours et sur mes projets.</p>
+
+      <div class="skills">
+        <div class="skill-group">
+          <h3>Langages</h3>
+          <div class="tags">
+            <span class="tag">TypeScript</span>
+            <span class="tag">JavaScript</span>
+            <span class="tag">C (C99)</span>
+            <span class="tag">SQL (MySQL)</span>
+            <span class="tag">Bash</span>
+            <span class="tag">HTML5 / CSS3</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <h3>Conception &amp; Architecture</h3>
+          <div class="tags">
+            <span class="tag">UML</span>
+            <span class="tag">MCD / MLD</span>
+            <span class="tag">MVC</span>
+            <span class="tag">POO</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <h3>Systèmes &amp; Outils</h3>
+          <div class="tags">
+            <span class="tag">Linux (Debian, shell)</span>
+            <span class="tag">Git / GitHub</span>
+            <span class="tag">VS Code</span>
+            <span class="tag">Makefile</span>
+            <span class="tag">Docker (notions)</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <h3>Méthodologies</h3>
+          <div class="tags">
+            <span class="tag">Agile / Scrum (SAÉ)</span>
+            <span class="tag">Git Flow</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== PARCOURS ===================== -->
+  <section class="block" id="parcours">
+    <div class="wrap">
+      <p class="eyebrow">// 03 — parcours</p>
+      <h2>Parcours &amp; Formation</h2>
+      <p class="lead">Formation universitaire en trois ans, centrée sur la conception et le développement d'applications.</p>
+
+      <ol class="timeline">
+        <li>
+          <span class="period">2025 – 2028</span>
+          <div>
+            <h3>BUT Informatique — Parcours RACD</h3>
+            <p class="place">IUT de Metz, Université de Lorraine</p>
+            <p class="detail">Réalisation d'applications : conception et développement. Programmation orientée objet en TypeScript, algorithmique, bases de données, réseaux, SAÉ de gestion de projet.</p>
+          </div>
+        </li>
+        <li>
+          <span class="period">2025</span>
+          <div>
+            <h3>Baccalauréat général</h3>
+            <p class="place">Spécialités Mathématiques et HGGSP</p>
+            <p class="detail">Mention Bien.</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ===================== CONTACT ===================== -->
+  <section class="block alt" id="contact">
+    <div class="wrap">
+      <p class="eyebrow">// 04 — contact</p>
+      <h2>Contact</h2>
+      <p class="lead">Disponible du 12 avril au 4 juin 2027 pour un stage conventionné en développement logiciel ou web. Le plus simple pour me joindre : un message sur LinkedIn.</p>
+
+      <div class="contact-grid">
+        <a class="contact-item" href="https://github.com/Hamrani-Lounis" target="_blank" rel="noopener">
+          <span class="k">GitHub</span>
+          <span class="v">github.com/Hamrani-Lounis</span>
+        </a>
+        <a class="contact-item" href="https://www.linkedin.com/in/lounis-hamrani-b28143375" target="_blank" rel="noopener">
+          <span class="k">LinkedIn</span>
+          <span class="v">in/lounis-hamrani</span>
+        </a>
+      </div>
+
+      <div class="meta">
+        <span>
+          <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0a5.5 5.5 0 00-5.5 5.5C2.5 9.6 8 16 8 16s5.5-6.4 5.5-10.5A5.5 5.5 0 008 0zm0 7.75a2.25 2.25 0 110-4.5 2.25 2.25 0 010 4.5z"/></svg>
+          Metz (57) · Mobile sur le Luxembourg
+        </span>
+        <span>
+          <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.1 3.4A2 2 0 015 2h6a2 2 0 011.9 1.4L14 7v5a1 1 0 01-1 1h-1a1 1 0 01-1-1v-1H5v1a1 1 0 01-1 1H3a1 1 0 01-1-1V7l1.1-3.6zM4.6 4L3.8 7h8.4l-.8-3H4.6zM4.5 10a1 1 0 100-2 1 1 0 000 2zm7 0a1 1 0 100-2 1 1 0 000 2z"/></svg>
+          Permis B · Véhicule personnel
+        </span>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Lounis Hamrani</span>
+    <span class="mono">HTML5 · CSS3 · aucun framework</span>
+  </div>
+</footer>
+
+</body>
+</html>
